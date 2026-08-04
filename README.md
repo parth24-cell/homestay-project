@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uttarahalli SRS Homestay & PG - Production Ready Codebase
 
-## Getting Started
+This project is a premium, statically generated Next.js 16 (App Router) website tailored for a luxury homestay. It uses Tailwind CSS, Framer Motion, and shadcn/ui.
 
-First, run the development server:
+## Deployment Notes
 
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run Locally
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for Production
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Deploy to Vercel
+This project is pre-configured and optimized for [Vercel](https://vercel.com).
+1. Push this repository to GitHub/GitLab/Bitbucket.
+2. Import the project in your Vercel dashboard.
+3. Vercel will automatically detect Next.js and apply the correct build settings.
+4. Deploy!
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**All business information** (phone numbers, emails, addresses, Map URLs) is stored centrally to avoid hardcoding in the UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Update the following files before launch:
+1. `src/config/contact.ts` - Contains all contact information and Google Maps Embed URL.
+2. `src/config/seo.ts` - Contains site metadata, description, and Open Graph information.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Final Asset Checklist 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The following placeholder assets must be replaced before the final production launch. 
+
+### 1. Metadata & Icons
+- [ ] `src/app/favicon.ico` - Replace with the actual brand favicon.
+- [ ] `src/app/opengraph-image.png` - Replace with a 1200x630 branded image for social sharing (Facebook, LinkedIn).
+- [ ] `src/app/twitter-image.png` - Replace with a 1200x630 branded image for Twitter sharing.
+
+### 2. Video Assets
+- [ ] **Hero Background Video:** Update the `<source>` tag in `src/components/sections/hero.tsx` (or place the video in `public/videos/hero.mp4` and reference it).
+- [ ] **Video Tour Video:** Update the `<source>` tag in `src/components/sections/video-tour.tsx` (or place in `public/videos/tour.mp4`).
+
+### 3. Image Assets
+- [ ] **About Section:** Update the `src` attribute of the Next.js `<Image>` in `src/components/sections/about.tsx`.
+- [ ] **Gallery Section:** Replace the URLs in the `galleryImages` array in `src/components/sections/gallery.tsx`.
+
+### 4. Content
+- [ ] **Testimonials:** Replace the placeholder testimonials array in `src/components/sections/testimonials.tsx` with genuine customer reviews.
+- [ ] **Google Maps Embed:** Go to Google Maps -> Share -> Embed a map -> Copy the `src` URL inside the `<iframe>` and paste it into `src/config/contact.ts` under `googleMapsEmbedUrl`.
