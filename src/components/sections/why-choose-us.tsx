@@ -2,82 +2,88 @@ import { Wallet, Train, CalendarDays, Briefcase, Sofa, MapPin } from "lucide-rea
 import { Section } from "@/components/ui/section"
 import { Container } from "@/components/ui/container"
 import { Heading } from "@/components/ui/heading"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { StaggerContainer, SlideUp, FadeIn } from "@/components/ui/animations"
 
 const features = [
   {
-    title: "Budget-Friendly Accommodation",
+    title: "Budget-Friendly",
     description: "Enjoy premium living spaces without compromising on affordability.",
     icon: Wallet,
   },
   {
-    title: "Near Doddakallasandra Metro",
-    description: "Excellent connectivity to the rest of Bangalore for an easy daily commute.",
+    title: "Metro Connectivity",
+    description: "Located near Doddakallasandra Metro for an easy daily commute.",
     icon: Train,
   },
   {
-    title: "Daily, Weekly & Monthly Stay",
-    description: "Flexible duration options tailored for travelers, students, and professionals.",
+    title: "Flexible Stay",
+    description: "Daily, weekly, and monthly options tailored to your needs.",
     icon: CalendarDays,
   },
   {
-    title: "Students & Professionals",
-    description: "A peaceful environment ideal for studying, working, or simply relaxing.",
+    title: "Ideal for Professionals",
+    description: "A peaceful environment ideal for studying, working, or relaxing.",
     icon: Briefcase,
   },
   {
-    title: "Comfortable Environment",
-    description: "Thoughtfully designed interiors focused on providing a restful experience.",
+    title: "Premium Comfort",
+    description: "Thoughtfully designed interiors focused on restful experiences.",
     icon: Sofa,
   },
   {
-    title: "Convenient Location",
-    description: "Located centrally in Subramanya Pura, keeping everything within reach.",
+    title: "Prime Location",
+    description: "Centrally located in Subramanya Pura, keeping everything in reach.",
     icon: MapPin,
   },
 ]
 
 export function WhyChooseUs() {
   return (
-    <Section id="why-choose-us" className="bg-background">
-      <Container>
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <FadeIn>
-            <span className="text-secondary font-medium tracking-wider uppercase text-sm mb-3 block">
-              Why Choose Us
-            </span>
-          </FadeIn>
-          <SlideUp delay={0.1}>
-            <Heading level="h2" className="mb-4 text-foreground">
-              Why Choose Uttarahalli SRS Homestay & PG?
-            </Heading>
-          </SlideUp>
-          <SlideUp delay={0.2}>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Everything you need for a comfortable and affordable stay in Bangalore.
+    <Section id="why-choose-us" className="bg-white py-24 relative overflow-hidden">
+      {/* Decorative Elements */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 -ml-32 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute right-0 bottom-0 translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+      <Container className="relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 mb-16 items-end">
+          <div className="flex-1 max-w-2xl">
+            <FadeIn>
+              <div className="flex items-center gap-4 mb-4">
+                <div className="h-[2px] w-12 bg-secondary" />
+                <span className="text-secondary font-semibold tracking-widest uppercase text-xs">
+                  The Experience
+                </span>
+              </div>
+            </FadeIn>
+            <SlideUp delay={0.1}>
+              <Heading level="h2" className="text-foreground font-heading text-4xl md:text-5xl leading-tight">
+                Why Uttarahalli SRS is the smart choice.
+              </Heading>
+            </SlideUp>
+          </div>
+          <SlideUp delay={0.2} className="flex-1">
+            <p className="text-muted-foreground text-lg leading-relaxed font-light">
+              We focus on the details so you don&apos;t have to. Experience a perfectly balanced lifestyle with modern amenities, strategic location, and uncompromising comfort.
             </p>
           </SlideUp>
         </div>
 
-        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {features.map((feature, index) => (
             <SlideUp key={index}>
-              <Card className="h-full border-transparent bg-white shadow-sm hover:shadow-xl transition-all duration-300 group rounded-2xl overflow-hidden">
-                <CardHeader className="pb-4 pt-8 px-8">
-                  <div className="h-12 w-12 rounded-full bg-secondary/10 text-secondary flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
-                    <feature.icon className="h-6 w-6" />
+              <div className="group flex flex-col p-8 rounded-3xl bg-background border border-border/50 hover:border-primary/20 hover:bg-primary/5 transition-all duration-300">
+                <div className="mb-6">
+                  <div className="h-16 w-16 rounded-2xl bg-white shadow-sm border border-border/50 text-secondary flex items-center justify-center group-hover:scale-110 group-hover:bg-secondary group-hover:text-white transition-all duration-300">
+                    <feature.icon className="h-7 w-7" strokeWidth={1.5} />
                   </div>
-                  <CardTitle className="text-xl mb-2 group-hover:text-primary transition-colors">
-                    {feature.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="px-8 pb-8">
-                  <CardDescription className="text-base text-muted-foreground leading-relaxed">
-                    {feature.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+                </div>
+                <h3 className="text-xl font-bold font-heading text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-muted-foreground font-light leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
             </SlideUp>
           ))}
         </StaggerContainer>

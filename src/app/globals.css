@@ -1,10 +1,10 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+/* @import "tw-animate-css"; */
+/* @import "shadcn/tailwind.css"; */
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
+@theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-playfair), ui-serif, Georgia, serif;
   
@@ -54,64 +54,64 @@
 
 :root {
   /* Luxury Palette */
-  --background: #F8F5F0;
-  --foreground: #222222;
+  --background: #FAFAF9;
+  --foreground: #111827;
   
-  --primary: #0F3D3E;
+  --primary: #0F766E;
   --primary-foreground: #FFFFFF;
   
-  --secondary: #C8A96A;
+  --secondary: #F59E0B;
   --secondary-foreground: #FFFFFF;
   
-  --muted: #EBE6DC;
-  --muted-foreground: #666666;
+  --muted: #F3F4F6;
+  --muted-foreground: #6B7280;
   
-  --accent: #EBE6DC;
-  --accent-foreground: #222222;
+  --accent: #14B8A6;
+  --accent-foreground: #FFFFFF;
   
   --destructive: #ef4444;
   --destructive-foreground: #FFFFFF;
   
-  --border: #E5E0D8;
-  --input: #E5E0D8;
-  --ring: #0F3D3E;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #0F766E;
   
   --card: #FFFFFF;
-  --card-foreground: #222222;
+  --card-foreground: #111827;
   --popover: #FFFFFF;
-  --popover-foreground: #222222;
+  --popover-foreground: #111827;
   
-  --radius: 0.75rem;
+  --radius: 1.5rem; /* 24px */
 }
 
 .dark {
   /* Dark mode preparation */
-  --background: #121212;
-  --foreground: #F8F5F0;
+  --background: #111827;
+  --foreground: #FAFAF9;
   
-  --primary: #0F3D3E;
+  --primary: #0F766E;
   --primary-foreground: #FFFFFF;
   
-  --secondary: #C8A96A;
-  --secondary-foreground: #222222;
+  --secondary: #F59E0B;
+  --secondary-foreground: #FFFFFF;
   
-  --muted: #2A2A2A;
-  --muted-foreground: #A1A1AA;
+  --muted: #1F2937;
+  --muted-foreground: #9CA3AF;
   
-  --accent: #2A2A2A;
-  --accent-foreground: #F8F5F0;
+  --accent: #14B8A6;
+  --accent-foreground: #FFFFFF;
   
   --destructive: #7f1d1d;
   --destructive-foreground: #FFFFFF;
   
-  --border: #2A2A2A;
-  --input: #2A2A2A;
-  --ring: #C8A96A;
+  --border: #374151;
+  --input: #374151;
+  --ring: #0F766E;
   
-  --card: #1E1E1E;
-  --card-foreground: #F8F5F0;
-  --popover: #1E1E1E;
-  --popover-foreground: #F8F5F0;
+  --card: #1F2937;
+  --card-foreground: #FAFAF9;
+  --popover: #1F2937;
+  --popover-foreground: #FAFAF9;
 }
 
 @layer base {

@@ -8,6 +8,33 @@ type MotionWrapperProps = HTMLMotionProps<"div"> & {
   children: React.ReactNode
 }
 
+function usePrefersReducedMotionOrMobile() {
+  const [shouldReduce, setShouldReduce] = React.useState(false)
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mobileQuery = window.matchMedia("(max-width: 768px)")
+    
+    const checkStatus = () => {
+      setShouldReduce(motionQuery.matches || mobileQuery.matches)
+    }
+    
+    checkStatus()
+    
+    motionQuery.addEventListener("change", checkStatus)
+    mobileQuery.addEventListener("change", checkStatus)
+    
+    return () => {
+      motionQuery.removeEventListener("change", checkStatus)
+      mobileQuery.removeEventListener("change", checkStatus)
+    }
+  }, [])
+
+  return shouldReduce
+}
+
 export function MotionWrapper({ children, className, ...props }: MotionWrapperProps) {
   return (
     <motion.div className={cn(className)} {...props}>
@@ -17,12 +44,14 @@ export function MotionWrapper({ children, className, ...props }: MotionWrapperPr
 }
 
 export function FadeIn({ children, className, delay = 0, duration = 0.5, ...props }: MotionWrapperProps & { delay?: number, duration?: number }) {
+  const shouldReduce = usePrefersReducedMotionOrMobile()
+
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      initial={shouldReduce ? { opacity: 1 } : { opacity: 0 }}
+      whileInView={shouldReduce ? { opacity: 1 } : { opacity: 1 }}
+      viewport={shouldReduce ? undefined : { once: true, margin: "-10%" }}
+      transition={shouldReduce ? { duration: 0 } : { duration, delay, ease: "easeOut" }}
       className={className}
       {...props}
     >
@@ -32,12 +61,14 @@ export function FadeIn({ children, className, delay = 0, duration = 0.5, ...prop
 }
 
 export function SlideUp({ children, className, delay = 0, duration = 0.5, yOffset = 30, ...props }: MotionWrapperProps & { delay?: number, duration?: number, yOffset?: number }) {
+  const shouldReduce = usePrefersReducedMotionOrMobile()
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      initial={shouldReduce ? { opacity: 1, y: 0 } : { opacity: 0, y: yOffset }}
+      whileInView={shouldReduce ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+      viewport={shouldReduce ? undefined : { once: true, margin: "-10%" }}
+      transition={shouldReduce ? { duration: 0 } : { duration, delay, ease: "easeOut" }}
       className={className}
       {...props}
     >
@@ -47,12 +78,14 @@ export function SlideUp({ children, className, delay = 0, duration = 0.5, yOffse
 }
 
 export function ScaleIn({ children, className, delay = 0, duration = 0.5, initialScale = 0.95, ...props }: MotionWrapperProps & { delay?: number, duration?: number, initialScale?: number }) {
+  const shouldReduce = usePrefersReducedMotionOrMobile()
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: initialScale }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      initial={shouldReduce ? { opacity: 1, scale: 1 } : { opacity: 0, scale: initialScale }}
+      whileInView={shouldReduce ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+      viewport={shouldReduce ? undefined : { once: true, margin: "-10%" }}
+      transition={shouldReduce ? { duration: 0 } : { duration, delay, ease: "easeOut" }}
       className={className}
       {...props}
     >
@@ -62,13 +95,15 @@ export function ScaleIn({ children, className, delay = 0, duration = 0.5, initia
 }
 
 export function StaggerContainer({ children, className, staggerDelay = 0.1, delayChildren = 0, ...props }: MotionWrapperProps & { staggerDelay?: number, delayChildren?: number }) {
+  const shouldReduce = usePrefersReducedMotionOrMobile()
+
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: { opacity: shouldReduce ? 1 : 0 },
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: staggerDelay,
-        delayChildren: delayChildren,
+        staggerChildren: shouldReduce ? 0 : staggerDelay,
+        delayChildren: shouldReduce ? 0 : delayChildren,
       }
     }
   }
@@ -76,9 +111,9 @@ export function StaggerContainer({ children, className, staggerDelay = 0.1, dela
   return (
     <motion.div
       variants={containerVariants}
-      initial="hidden"
+      initial={shouldReduce ? "show" : "hidden"}
       whileInView="show"
-      viewport={{ once: true, margin: "-10%" }}
+      viewport={shouldReduce ? undefined : { once: true, margin: "-10%" }}
       className={className}
       {...props}
     >
